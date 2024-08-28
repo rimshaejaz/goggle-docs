@@ -7,7 +7,7 @@ import { getDocument, updateDcoument } from './controller/document-controller.js
 
 // Will run on port 9000
 // Allow localhost:300 & GET POST
-const PORT = 9000;
+const PORT = process.env.PORT;
 
 const io = new Server(PORT, {
     cors: {
