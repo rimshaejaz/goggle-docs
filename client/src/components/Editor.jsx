@@ -53,7 +53,7 @@ const Editor = () => {
 
     // Connection to backend, pass into setSocket
     useEffect(() => {
-        const socketServer = io('http://localhost:9000');
+        const socketServer = io('');
         setSocket(socketServer);
         // When the component is unmounted, no longer a part of the UI, disconnect the connection to backend 
         return () => {
