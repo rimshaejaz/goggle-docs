@@ -2,12 +2,15 @@ import { Server } from 'socket.io';
 
 import mongoose from 'mongoose';
 import 'dotenv/config';
+import path from "path";
+import express from 'express';
 
 import { getDocument, updateDcoument } from './controller/document-controller.js';
 
-// Will run on port 9000
+// Backend will run on port 9000
 // Allow localhost:300 & GET POST
 const PORT = process.env.PORT;
+const app = express();
 
 const io = new Server(PORT, {
     cors: {
@@ -15,6 +18,20 @@ const io = new Server(PORT, {
         methods: ['GET', 'POST']
     }
 });
+
+// -------------Deployment-----------
+const _dirname1 = path.resolve()
+if(process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(_dirname1, '/client/build')));
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(_dirname1, "client", "build", "index.html"))
+    })
+
+} else {
+    app.get("/", (req, res) => {
+        res.send("API is running successfully.")
+    });
+}
 
 // Database connection
 mongoose 
