@@ -53,7 +53,7 @@ const Editor = () => {
 
     // Connection to backend, pass into setSocket
     useEffect(() => {
-        const socketServer = io('');
+        const socketServer = io('https://goggle-docs-server.onrender.com');
         setSocket(socketServer);
         // When the component is unmounted, no longer a part of the UI, disconnect the connection to backend 
         return () => {
