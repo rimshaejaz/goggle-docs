@@ -5,7 +5,7 @@ import 'dotenv/config';
 import path from "path";
 import express from 'express';
 
-import { getDocument, updateDcoument } from './controller/document-controller.js';
+import { getDocument, updateDocument } from './controller/document-controller.js';
 
 // Backend will run on port 9000
 // Allow localhost:300 & GET POST
@@ -54,7 +54,7 @@ io.on('connection', socket => {
             socket.broadcast.to(documentId).emit('receive-changes', delta);
         });
         socket.on('save-document', async data => {
-            await updateDcoument(documentId, data);
+            await updateDocument(documentId, data);
         });
     }); 
 });
